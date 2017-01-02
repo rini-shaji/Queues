@@ -1,0 +1,72 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package queueimplementation;
+
+/**
+ *
+ * @author Rini
+ */
+public class QueueImplementation {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        MyQueue q=new MyQueue();
+        if (q.isEmpty()){
+        System.out.println("Empty Queue");
+        }else{
+        System.out.println("First item:"+ q.peek());
+        }
+        q.enqueque(3);
+        q.enqueque(5);
+        q.enqueque(7);
+        if (q.isEmpty()){
+        System.out.println("Empty Queue");
+        }else{
+        System.out.println("First item:"+ q.peek());
+        }
+        while(!q.isEmpty()){
+        System.out.println("Removed:"+ q.dequeque());
+        }
+    }
+    
+    public static class Node{
+        int data;
+        Node next;
+        public Node(int data){
+            this.data=data;
+        }
+    }
+    
+    public static class MyQueue{
+        private Node head;//remove elements from
+        private Node tail;//add elements to 
+        public boolean isEmpty(){
+            if (head==null){return true;}
+            return false;
+        }
+        public int peek(){
+            if (head==null){return -1;}
+            return head.data;
+        }
+        public void enqueque(int data){
+        Node newTail=new Node(data);
+        if (tail!=null){tail.next=newTail;}
+        tail=newTail;
+        if (head==null){head=newTail;}
+        }
+        public int dequeque(){
+            if (head==null){return -1;}
+            int data =head.data;
+            head=head.next;
+            if(head==null){tail=null;}
+            return data;
+        }
+    }
+    
+}
